@@ -1,0 +1,6 @@
+{
+  "name": "Code Guardian AI",
+  "description": "An AI-powered code review assistant. Enter a public GitHub repository URL, select a file, and get an instant, detailed code analysis with suggestions for improvement powered by Gemini.",
+  "requestFramePermissions": [],
+  "prompt": ""
+}
