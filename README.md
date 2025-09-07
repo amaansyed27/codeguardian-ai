@@ -36,7 +36,24 @@ This repo is a small React + Vite single-page app. Enter a Gemini API key, paste
 - Node.js (recommended v18+)
 - A Gemini API key for the AI reviews
 
-Note: This project currently includes a GitHub token inside `services/githubService.ts` for demo purposes only (client-side). See Security section.
+## Deployment to Vercel
+
+1. Connect your GitHub repository to Vercel
+2. In the Vercel dashboard, add the following environment variables:
+   - `GEMINI_API_KEY`: Your Google Gemini API key
+   - `GITHUB_TOKEN`: Your GitHub Personal Access Token
+3. Deploy the application
+
+The environment variables will be automatically available to your application through Vite's build process.
+
+## Important security notes
+
+- GitHub tokens are now properly handled through environment variables instead of being hardcoded.
+- For local development: Use `.env.local` (which is gitignored) to store your tokens safely.
+- For Vercel deployment: Set environment variables in the Vercel dashboard.
+- The GitHub token is still exposed on the client-side due to the browser-only architecture. For production applications, consider:
+  - Moving GitHub API requests to a backend service that safely stores the token and proxies requests.
+  - Rate limiting and caching requests on the server to avoid hitting GitHub limits.
 
 ## Install and run (local)
 
@@ -46,13 +63,27 @@ Note: This project currently includes a GitHub token inside `services/githubServ
    npm install
    ```
 
-2. Start the dev server
+2. Set up environment variables
+
+   Copy `.env.local.example` to `.env.local` and add your API keys:
+   
+   ```powershell
+   cp .env.local.example .env.local
+   ```
+   
+   Then edit `.env.local` with your actual tokens:
+   ```
+   GEMINI_API_KEY=your_gemini_api_key_here
+   GITHUB_TOKEN=your_github_token_here
+   ```
+
+3. Start the dev server
 
    ```powershell
    npm run dev
    ```
 
-3. Open the app in your browser at the address Vite prints (usually http://localhost:5173).
+4. Open the app in your browser at the address Vite prints (usually http://localhost:5173).
 
 ## Basic usage
 
@@ -62,11 +93,12 @@ Note: This project currently includes a GitHub token inside `services/githubServ
 
 ## Important security notes
 
-- The current `services/githubService.ts` contains a hardcoded `GITHUB_TOKEN` used for GitHub API requests. This is insecure for production and exposed to anyone who can access the client bundle.
-- Recommended fixes:
-  - Move GitHub API requests to a backend service that safely stores the token and proxies requests.
-  - Remove any secrets from client-side source and use environment variables on the server.
-  - Rate limit and cache requests on the server to avoid hitting GitHub limits.
+- GitHub tokens are now properly handled through environment variables instead of being hardcoded.
+- For local development: Use `.env.local` (which is gitignored) to store your tokens safely.
+- For Vercel deployment: Set environment variables in the Vercel dashboard.
+- The GitHub token is still exposed on the client-side due to the browser-only architecture. For production applications, consider:
+  - Moving GitHub API requests to a backend service that safely stores the token and proxies requests.
+  - Rate limiting and caching requests on the server to avoid hitting GitHub limits.
 
 ## Files of interest
 

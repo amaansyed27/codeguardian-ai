@@ -3,12 +3,10 @@ import { GitHubFile } from '../types';
 
 const GITHUB_API_BASE = 'https://api.github.com';
 
-// WARNING: For demonstration purposes, a token is hardcoded here to prevent API rate-limiting issues
-// in a browser-only environment where process.env is not available.
-// In a real-world application, this is a major security risk.
-// A GitHub token should NEVER be exposed on the client-side.
-// It should be handled securely via a backend proxy or environment variables in a build system.
-const GITHUB_TOKEN = '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';
+// Retrieve GitHub token from environment variables
+// For Vercel: Set GITHUB_TOKEN in Vercel dashboard
+// For local development: Add GITHUB_TOKEN=your_token_here to .env.local
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
 const headers: HeadersInit = {
   'Accept': 'application/vnd.github.v3+json',

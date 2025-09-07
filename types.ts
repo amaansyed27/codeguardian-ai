@@ -1,4 +1,13 @@
 
+declare global {
+  namespace NodeJS {
+    interface ProcessEnv {
+      GEMINI_API_KEY: string;
+      GITHUB_TOKEN: string;
+    }
+  }
+}
+
 export interface GitHubFile {
   path: string;
   type: 'blob' | 'tree';
